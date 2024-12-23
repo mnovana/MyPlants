@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using MyPlants.Models;
+
 namespace MyPlants
 {
     public class Program
@@ -7,6 +10,10 @@ namespace MyPlants
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+
+            // Database for EF  
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                    options.UseSqlServer(ConfigurationExtensions.GetConnectionString(builder.Configuration, "AppConnectionString")));
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
