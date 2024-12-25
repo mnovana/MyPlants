@@ -1,4 +1,5 @@
 ﻿using MyPlants.Interfaces;
+using MyPlants.Models;
 
 namespace MyPlants.Services
 {
@@ -29,8 +30,8 @@ namespace MyPlants.Services
             }
             else
             {
-                
-                throw new Exception("Failed login: " + response.StatusCode);
+                var error = await response.Content.ReadFromJsonAsync<FirebaseError>();
+                throw new Exception("Failed login: " + error.Error.Message);
             }
         }
 
