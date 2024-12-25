@@ -1,5 +1,9 @@
+using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
 using Microsoft.EntityFrameworkCore;
 using MyPlants.Models;
+using MyPlants.Services;
+using MyPlants.Interfaces;
 
 namespace MyPlants
 {
@@ -19,6 +23,17 @@ namespace MyPlants
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            // HttpClient
+            builder.Services.AddHttpClient<IAuthenticationService, FirebaseAuthenticationService>(httpClient =>
+                httpClient.BaseAddress = new Uri(builder.Configuration["Authentication:SignInUri"])
+            );
+
+            // Firebase
+            FirebaseApp.Create(new AppOptions
+            {
+                Credential = GoogleCredential.FromFile("firebase.json")
+            });
 
             var app = builder.Build();
 
