@@ -23,5 +23,7 @@ namespace MyPlants.Models
 
         [Required]
         public string UserId { get; set; }
+
+        public ICollection<Watering> Waterings { get; set; }
     }
 }
