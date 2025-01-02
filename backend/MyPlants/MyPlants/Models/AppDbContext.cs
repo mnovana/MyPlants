@@ -17,6 +17,13 @@ namespace MyPlants.Models
             modelBuilder.Entity<Watering>()
                 .HasKey(w => new { w.PlantId, w.Date });
 
+            // Delete waterings when a plant is deleted
+            modelBuilder.Entity<Watering>()
+                    .HasOne(w => w.Plant)
+                    .WithMany(p => p.Waterings)
+                    .HasForeignKey(w => w.PlantId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
             // Index
             modelBuilder.Entity<Plant>()
                 .HasIndex(p => p.UserId);

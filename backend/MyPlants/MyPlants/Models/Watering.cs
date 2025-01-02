@@ -10,5 +10,7 @@ namespace MyPlants.Models
         public int PlantId { get; set; }
         [Required]
         public bool Fertilized { get; set; }
+
+        public Plant? Plant { get; set; }
     }
 }
