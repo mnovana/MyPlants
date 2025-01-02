@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using MyPlants.Models;
 using MyPlants.Services;
 using MyPlants.Interfaces;
+using MyPlants.Middleware;
 
 namespace MyPlants
 {
@@ -20,7 +21,6 @@ namespace MyPlants
                     options.UseSqlServer(ConfigurationExtensions.GetConnectionString(builder.Configuration, "AppConnectionString")));
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
@@ -39,6 +39,12 @@ namespace MyPlants
                 httpClient.BaseAddress = new Uri(builder.Configuration["Authentication:SignInUri"])
             );
 
+            // HttpContextAccessor
+            builder.Services.AddHttpContextAccessor();
+
+            // IMiddleware
+            builder.Services.AddScoped<GlobalExceptionHandlingMiddleware>();
+
             // Firebase
             FirebaseApp.Create(new AppOptions
             {
@@ -54,13 +60,11 @@ namespace MyPlants
                 app.UseSwaggerUI();
             }
 
+            app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
             app.UseHttpsRedirection();
             app.UseCors();
             app.UseAuthorization();
-
-
             app.MapControllers();
-
             app.Run();
         }
     }
