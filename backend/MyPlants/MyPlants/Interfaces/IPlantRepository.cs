@@ -6,7 +6,7 @@ namespace MyPlants.Interfaces
     {
         Task<IEnumerable<Plant>> GetByUserAsync(string userId);
         Task<Plant?> GetByIdAsync(int id);
-        Task AddAsync(Plant plant);
+        Task<bool> AddAsync(Plant plant);
         Task<bool> UpdateAsync(Plant plant);
         Task<bool> DeleteAsync(int id);
     }

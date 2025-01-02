@@ -13,10 +13,12 @@ namespace MyPlants.Repositories
             _context = context;
         }
         
-        public async Task AddAsync(Plant plant)
+        public async Task<bool> AddAsync(Plant plant)
         {
             await _context.Plants.AddAsync(plant);
-            await _context.SaveChangesAsync();
+            int rowsAffected = await _context.SaveChangesAsync();
+
+            return rowsAffected == 1;
         }
 
         public async Task<bool> DeleteAsync(int id)
