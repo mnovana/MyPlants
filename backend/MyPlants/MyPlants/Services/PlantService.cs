@@ -63,7 +63,7 @@ namespace MyPlants.Services
 
         public async Task<IEnumerable<Plant>> GetByUserAsync()
         {
-            var userId = _contextAccessor.HttpContext.User.FindFirst("sub").ToString();
+            var userId = _contextAccessor.HttpContext.User.FindFirst("user_id").Value;
             var plants = await _plantRepository.GetByUserAsync(userId);
 
             return plants;
