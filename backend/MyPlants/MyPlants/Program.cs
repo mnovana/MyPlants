@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using MyPlants.Repositories;
 
 namespace MyPlants
 {
@@ -46,6 +47,14 @@ namespace MyPlants
             // HttpContextAccessor
             builder.Services.AddHttpContextAccessor();
 
+            // Services
+            builder.Services.AddScoped<IPlantService, PlantService>();
+            builder.Services.AddScoped<IWateringService, WateringService>();
+
+            // Repositories
+            builder.Services.AddScoped<IPlantRepository, PlantRepository>();
+            builder.Services.AddScoped<IWateringRepository, WateringRepository>();
+
             // IMiddleware
             builder.Services.AddScoped<GlobalExceptionHandlingMiddleware>();
 
@@ -55,7 +64,7 @@ namespace MyPlants
                 Credential = GoogleCredential.FromFile("firebase.json")
             });
 
-            builder.Services.AddAuthentication().AddJwtBearer(JwtBearerDefaults.AuthenticationScheme)
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
                     options.Authority = builder.Configuration["Authentication:Issuer"];
