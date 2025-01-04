@@ -22,7 +22,10 @@ namespace MyPlants.Services
 
         public async Task<PlantDTO> AddAsync(Plant plant)
         {
-            if(!await _plantRepository.AddAsync(plant))
+            var userId = _contextAccessor.HttpContext.User.FindFirst("user_id").Value;
+            plant.UserId = userId;
+
+            if (!await _plantRepository.AddAsync(plant))
             {
                 throw new Exception("Failed to add a new plant.");
             }
@@ -32,7 +35,7 @@ namespace MyPlants.Services
 
         public async Task DeleteAsync(int id)
         {
-            var userId = _contextAccessor.HttpContext.User.FindFirst("sub").ToString();
+            var userId = _contextAccessor.HttpContext.User.FindFirst("user_id").Value;
             var plant = await _plantRepository.GetByIdAsync(id);
 
             if(plant == null)
@@ -51,7 +54,7 @@ namespace MyPlants.Services
 
         public async Task<PlantDTO> GetByIdAsync(int id)
         {
-            var userId = _contextAccessor.HttpContext.User.FindFirst("sub").ToString();
+            var userId = _contextAccessor.HttpContext.User.FindFirst("user_id").Value;
             var plant = await _plantRepository.GetByIdAsync(id);
 
             if (plant == null)
@@ -76,7 +79,7 @@ namespace MyPlants.Services
 
         public async Task<PlantDTO> UpdateAsync(Plant plant)
         {
-            var userId = _contextAccessor.HttpContext.User.FindFirst("sub").ToString();
+            var userId = _contextAccessor.HttpContext.User.FindFirst("user_id").Value;
             var fetchedPlant = await _plantRepository.GetByIdAsync(plant.Id);
 
             if (fetchedPlant == null)
