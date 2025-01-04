@@ -33,7 +33,7 @@ namespace MyPlants.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [HttpPost]
+        [HttpDelete]
         public async Task<IActionResult> DeleteWatering(int plantId, DateTime date)
         {
             await _wateringService.DeleteAsync(plantId, date);
