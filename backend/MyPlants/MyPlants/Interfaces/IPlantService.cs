@@ -1,13 +1,14 @@
 ﻿using MyPlants.Models;
+using MyPlants.Models.DTOs;
 
 namespace MyPlants.Interfaces
 {
     public interface IPlantService
     {
-        Task<IEnumerable<Plant>> GetByUserAsync();
-        Task<Plant> GetByIdAsync(int id);
-        Task<Plant> AddAsync(Plant plant);
-        Task<Plant> UpdateAsync(Plant plant);
+        Task<IEnumerable<PlantDTO>> GetByUserAsync();
+        Task<PlantDTO> GetByIdAsync(int id);
+        Task<PlantDTO> AddAsync(Plant plant);
+        Task<PlantDTO> UpdateAsync(Plant plant);
         Task DeleteAsync(int id);
     }
 }

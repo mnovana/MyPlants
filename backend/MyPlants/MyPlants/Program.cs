@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using MyPlants.Repositories;
+using MyPlants.Models.DTOs;
 
 namespace MyPlants
 {
@@ -46,6 +47,9 @@ namespace MyPlants
 
             // HttpContextAccessor
             builder.Services.AddHttpContextAccessor();
+
+            // AutoMapper
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
 
             // Services
             builder.Services.AddScoped<IPlantService, PlantService>();
