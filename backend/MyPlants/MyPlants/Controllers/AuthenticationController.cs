@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyPlants.Interfaces;
+using MyPlants.Models;
 
 namespace MyPlants.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api")]
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
@@ -16,12 +17,12 @@ namespace MyPlants.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(string email, string password)
+        public async Task<IActionResult> Login(LoginDTO loginDTO)
         {
             try
             {
-                string token = await _authenticationService.LoginAsync(email, password);
-                return Ok(new { token, email });
+                string token = await _authenticationService.LoginAsync(loginDTO.Email, loginDTO.Password);
+                return Ok(new { token, loginDTO.Email });
             }
             catch (Exception ex)
             {
