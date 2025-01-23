@@ -21,7 +21,7 @@ namespace MyPlants.Controllers
             try
             {
                 string token = await _authenticationService.LoginAsync(email, password);
-                return Ok(token);
+                return Ok(new { token, email });
             }
             catch (Exception ex)
             {
