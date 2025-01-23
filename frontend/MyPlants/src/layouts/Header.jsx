@@ -23,7 +23,7 @@ function Header() {
         <img src={gardenerImg} className="h-28" />
       </div>
 
-      {user.isLoggedIn && <div className="text-3xl m-10">{`Hi, ${user.username}! 🍀`}</div>}
+      {user.isLoggedIn && <div className="text-3xl m-10">{`Hi, ${user.email} 🍀`}</div>}
 
       {user.isLoggedIn && (
         <div className="lg:hidden flex justify-evenly">
