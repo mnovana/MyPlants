@@ -42,7 +42,7 @@ namespace MyPlants
 
             // HttpClient
             builder.Services.AddHttpClient<IAuthenticationService, FirebaseAuthenticationService>(httpClient =>
-                httpClient.BaseAddress = new Uri(builder.Configuration["Authentication:SignInUri"])
+                httpClient.BaseAddress = new Uri(builder.Configuration["AUTHENTICATION_SIGNINURI"])
             );
 
             // HttpContextAccessor
@@ -71,14 +71,14 @@ namespace MyPlants
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
-                    options.Authority = builder.Configuration["Authentication:Issuer"];
+                    options.Authority = builder.Configuration["AUTHENTICATION_ISSUER"];
                     options.TokenValidationParameters = new TokenValidationParameters()
                     {
                         ValidateIssuer = true,
                         ValidateAudience = true,
                         ValidateLifetime = true,
-                        ValidIssuer = builder.Configuration["Authentication:Issuer"],
-                        ValidAudience = builder.Configuration["Authentication:Audience"],
+                        ValidIssuer = builder.Configuration["AUTHENTICATION_ISSUER"],
+                        ValidAudience = builder.Configuration["AUTHENTICATION_AUDIENCE"],
                     };
                 });
 
