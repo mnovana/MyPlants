@@ -14,7 +14,7 @@ function Header() {
           <div className="text-xl tracking-wide">Track plants and their watering schedule!</div>
         </div>
 
-        {user.isLoggedIn ?? (
+        {user.isLoggedIn && (
           <div className="flex-1 hidden lg:flex justify-evenly">
             <MenuDesktop />
           </div>
