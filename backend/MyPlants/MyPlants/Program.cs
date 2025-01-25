@@ -6,9 +6,7 @@ using MyPlants.Services;
 using MyPlants.Interfaces;
 using MyPlants.Middleware;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using MyPlants.Repositories;
 using MyPlants.Models.DTOs;
 
@@ -18,6 +16,8 @@ namespace MyPlants
     {
         public static void Main(string[] args)
         {
+            DotNetEnv.Env.Load();
+
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
