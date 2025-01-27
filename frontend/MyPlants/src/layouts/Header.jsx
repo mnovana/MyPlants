@@ -8,7 +8,7 @@ function Header() {
 
   return (
     <>
-      <div className="flex justify-between items-center px-10">
+      <div className="flex justify-between items-center mx-10 mt-10">
         <div>
           <div className="text-6xl font-bold text-green-800">My Plants</div>
           <div className="text-xl tracking-wide">Track plants and their watering schedule!</div>
