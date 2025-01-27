@@ -7,7 +7,7 @@ function MainLayout() {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col gap-10">
       <Header />
       <Outlet />
       {isLoggedIn && <FooterMobile />}

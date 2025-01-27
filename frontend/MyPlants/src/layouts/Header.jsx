@@ -8,7 +8,7 @@ function Header() {
 
   return (
     <>
-      <div className="flex justify-between items-center p-10">
+      <div className="flex justify-between items-center px-10">
         <div>
           <div className="text-6xl font-bold text-green-800">My Plants</div>
           <div className="text-xl tracking-wide">Track plants and their watering schedule!</div>
@@ -23,7 +23,7 @@ function Header() {
         <img src={gardenerImg} className="h-28" />
       </div>
 
-      {user.isLoggedIn && <div className="text-3xl m-10">{`Hi, ${user.email} 🍀`}</div>}
+      {user.isLoggedIn && <div className="text-3xl mx-10 lg:mx-20">{`Hi, ${user.email} 🍀`}</div>}
 
       {user.isLoggedIn && (
         <div className="lg:hidden flex justify-evenly">
